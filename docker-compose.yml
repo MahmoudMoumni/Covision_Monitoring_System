@@ -12,11 +12,10 @@ services:
     volumes:
       - ./mysql-setup/init.sql:/data/application/init.sql
       - ./mysql-data:/var/lib/mysql
-    ports:
-      - "3311:3306"
+    #ports:
+      #- "3311:3306"
     container_name: mysql-container
-    networks:
-      - some-net
+
 
 
   phpmyadmin:
@@ -29,40 +28,42 @@ services:
     ports:
       - "8089:80"
     container_name: phpmyadmin-container
-    networks:
-      - some-net
-     
-
+  
   api:
     build: ./backend-server
     restart: always
-    ports:
-      - "3002:3002" # Expose API port
+    #ports:
+      #- "3002:3002" # Expose API port
     container_name: backend-container
     environment: # Set ENV vars
      - NODE_ENV=local
      - PORT=3002
     volumes: # Attach local book data directory
       - ./process_files:/process_files
-    networks:
-      - some-net
-  
+
   monitoring-server:
     build: ./python-server
     container_name: python-container
-    networks:
-      - some-net
+
 
   angular-app:
     build: ./frontend-server
-    ports:
-      - "4202:4202"
+    #ports:
+      #- "4202:4202"
     container_name: frontend-container
-    networks:
-      - some-net
+
+
+  nginx:
+    depends_on:
+      - angular-app
+      - api
+    restart: always
+    build: ./nginx-server
+    ports:
+      - "3050:80"
+    container_name: nginx-container
+
       
-networks:
-  some-net:
-    driver: bridge
+
 
 

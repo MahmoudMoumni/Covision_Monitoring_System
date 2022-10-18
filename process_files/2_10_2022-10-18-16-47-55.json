@@ -1,0 +1,1 @@
+{"id":2,"host_machine_id":"23","pid":10,"log_file":"/home/traficam/Covision_Monitoring_System/test/test.log","notification_params":"{\"email\":{\"receivers\":0,\"list_emails\":[]},\"telegram\":{\"receivers\":0,\"list_telegrams\":[]}}"}
