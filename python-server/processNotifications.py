@@ -3,7 +3,7 @@ import requests
 import time
 import json
 
-URL = "http://backend-container:3002/notification/"
+URL = "http://nginx-container:80/backend"+"/notification/";
 notification_list_api=URL+"all"
 notification_send_api=URL+"send"
 while True:
