@@ -2,7 +2,7 @@ const env = {
   database: "monitoring_system",
   username: "root",
   password: "secret",
-  host: "mysql-container",
+  host: "mysql-container1",
   dialect: "mysql",
   port:3306,
   pool: {

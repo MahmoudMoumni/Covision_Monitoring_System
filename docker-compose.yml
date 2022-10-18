@@ -14,7 +14,7 @@ services:
       - ./mysql-data:/var/lib/mysql
     #ports:
       #- "3311:3306"
-    container_name: mysql-container
+    container_name: mysql-container1
 
 
 
@@ -22,19 +22,19 @@ services:
     image: phpmyadmin/phpmyadmin:5.0.1
     restart: always
     environment:
-      PMA_HOST: mysql-container
+      PMA_HOST: mysql-container1
       PMA_USER: root
       PMA_PASSWORD: secret
     ports:
       - "8089:80"
-    container_name: phpmyadmin-container
+    container_name: phpmyadmin-container1
   
   api:
     build: ./backend-server
     restart: always
     #ports:
       #- "3002:3002" # Expose API port
-    container_name: backend-container
+    container_name: backend-container1
     environment: # Set ENV vars
      - NODE_ENV=local
      - PORT=3002
@@ -43,14 +43,14 @@ services:
 
   monitoring-server:
     build: ./python-server
-    container_name: python-container
+    container_name: python-container1
 
 
   angular-app:
     build: ./frontend-server
     #ports:
       #- "4202:4202"
-    container_name: frontend-container
+    container_name: frontend-container1
 
 
   nginx:
