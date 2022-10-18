@@ -1,4 +1,4 @@
-# Covision_Monitoring_System
+# Process_Monitoring_System
 after pulling the repo make sure to put your server ip in environtment file
 for frontend server(frontend-server/src/app/services/process.service.ts)
 
