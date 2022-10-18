@@ -44,15 +44,20 @@ updateNotification = (req, res) => {
 }
 
 function desactivateNotification(notification_id) {
+    console.log("desactivateNotification");
+    console.log("notification_id");
+    console.log(notification_id);
     return Notification.update(
         {
-            status:true
+            status:1
         },
         {
             where:{id:notification_id}
         }).then(notification => {
+            console.log("yessssssssssssssss");
             return true;
         }).catch(err => {
+            console.log("nooooooooooooooooo");
             return false;
         })
     
@@ -78,27 +83,25 @@ function  sendNotificationByTelegram(notification_message,telegram_params){
     const url = 'https://api.telegram.org/bot';
     let text = notification_message;
     let receivers=parseInt(telegram_params.receivers);
-    
-    //const apiToken =  "5669491567:AAElrWMrR7zdu9NaesjplyYlJj9EwMyt12A";
-    //let chatId =-1001741301960;
     for(let i=0;i<receivers;i++){
-        let apiToken=telegram_params.telegrams[i].token;
-        let chatId =telegram_params.telegrams[i].chat_id;
+        let apiToken=telegram_params.list_telegrams[i].token;
+        let chatId =telegram_params.list_telegrams[i].chat_id;
+        console.log(apiToken);
+        console.log(chatId);
         axios.post(`${url}${apiToken}/sendMessage`,
             {
                 chat_id: chatId,
                 text: text
             })
             .then((response) => { 
-                console.log("telegram yessssssssss");
                 console.log(response);
                
             }).catch((error) => {
-                console.log("telegram Noooooooooooooooo");
                 console.log(error);
               
             });
     }
+    return 1;
 }
 
 function processNotificationTypes(notification,notification_params){
@@ -107,14 +110,13 @@ function processNotificationTypes(notification,notification_params){
     let result=true;
     if(notification_params.hasOwnProperty("email")){
          result=sendNotificationByMail(notification_message,notification_params.email);
-        
     }
-    if(notification_params.hasOwnProperty("telegram")){
-        result&=sendNotificationByTelegram(notification_message,notification_params.telegram);
+    if(notification_params.hasOwnProperty("telegram")){        
+        result=sendNotificationByTelegram(notification_message,notification_params.telegram);
     }
     //add other channels
 
-    return result;
+    return true;
 }
 
 //update notification status to true (read)
@@ -130,21 +132,17 @@ sendNotification = (req, res) => {
       .then(process => {
             process=process.dataValues;
             let process_notification_params=JSON.parse(process.notification_params);
+            let desactivation_result=desactivateNotification(notification.id);
             let result=processNotificationTypes(notification,process_notification_params);
-            if(result){
-                let desactivation_result=desactivateNotification(notification.id);
-                if(desactivation_result){
-                    return res.status(200).json({
-                        message:"notification was sent successfully"
-                    });
-                }
-                else{
-                    return res.status(500).json({ message:"error desactivation notifs" });
-                }
+            if(desactivation_result){
+                return res.status(200).json({
+                    message:"notification was sent successfully"
+                });
             }
             else{
-                return res.status(500).json({ message:"error sending notifs" });
+                return res.status(500).json({ message:"error desactivation notifs" });
             }
+            
       })
       .catch(err => {
         return res.status(500).json({ message: err.message });

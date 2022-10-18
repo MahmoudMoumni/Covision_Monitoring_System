@@ -13,7 +13,7 @@ services:
       - ./mysql-setup/init.sql:/data/application/init.sql
       - ./mysql-data:/var/lib/mysql
     ports:
-      - "3307:3306"
+      - "3311:3306"
     container_name: mysql-container
     networks:
       - some-net

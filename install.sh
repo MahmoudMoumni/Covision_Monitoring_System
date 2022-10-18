@@ -7,6 +7,8 @@ ExecScript=$WorkingDirectory"/monitoring_system.sh"
 #create monitoring_service
 python3 create_monitoring_service.py $WorkingDirectory $ExecScript
 
+pip3 install requests
+
 #copy monitoring_service file to /etc/systemd/system
 cp process_monitoring_system.service /etc/systemd/system
 chmod a+x monitoring_system.sh

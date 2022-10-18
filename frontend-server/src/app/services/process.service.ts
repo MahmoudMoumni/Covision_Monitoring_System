@@ -5,20 +5,19 @@ import {Observable} from "rxjs";
 import {map} from "rxjs";
 
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class ProcessService {
 
-  baseURL:string="http://localhost:3002";
-  //baseURL:string="http://localhost:3002";
+   baseURL:string="http://your_server_ip:3002";//on server 
+  //baseURL:string="http://localhost:3002";//locally
   constructor(private httpClient: HttpClient) { }
 
   createProcess(monitored_process:any): Observable<any>{
     const headers = { 'content-type': 'application/json'}  
     const body=JSON.stringify(monitored_process);
-    console.log("in service");
-    console.log(body)
     return this.httpClient.post(this.baseURL+"/process/create",body,{'headers':headers});
   }
 
