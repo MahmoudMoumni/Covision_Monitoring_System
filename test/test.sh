@@ -1,0 +1,1 @@
+sudo python3 test.py 2>>test.log
