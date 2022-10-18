@@ -1,0 +1,45 @@
+
+.float-component {
+    background-color: #0F4380    ;
+    width: 100%;
+    height:100%;
+}
+
+.title{
+    color:#C8C336;
+    padding-top:20px;
+    margin-left: 40%;
+}
+
+.container{
+    padding-top: 80px;
+    width:80%;
+    height: 60%;
+}
+.mat-stepper-horizontal {
+    margin-top: 8px;
+  }
+  
+  .mat-form-field {
+    margin-top: 16px;
+  }
+
+  .input-field{
+    width: 30%;
+    margin-top: 10px;
+  }
+
+  .button-field{
+    width: 10%;
+    margin-left:3px;
+    margin-top: 10px;
+    background-color:#0F4380;
+    border-radius: 3px;
+    color:white;
+  }
+
+  .icone-poubelle {
+    margin-top: 3px;
+    width: 80%;
+    height:90%;
+  }

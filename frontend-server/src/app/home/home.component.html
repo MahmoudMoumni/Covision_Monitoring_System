@@ -1,0 +1,100 @@
+  <div class="container">
+    <mat-stepper linear #stepper>
+        <mat-step [stepControl]="firstFormGroup" [editable]="isEditable">
+          <form [formGroup]="firstFormGroup">
+            <ng-template matStepLabel>Fill Process Details</ng-template>
+            <div class="row input-field">
+                <mat-form-field appearance="fill">
+                    <mat-label>PID</mat-label>
+                    <input matInput type="number" formControlName="pid"  >
+                </mat-form-field>
+            </div>
+            <div class="row input-field">
+                <mat-form-field appearance="fill">
+                    <mat-label>HOST MACHINE ID</mat-label>
+                    <input matInput formControlName="host_machine_id"  >
+                </mat-form-field>
+            </div>
+            <div class="row input-field">
+                <mat-form-field appearance="fill">
+                    <mat-label>LOG FILE</mat-label>
+                    <input matInput formControlName="log_file"  >
+                </mat-form-field>
+            </div>
+            <div>
+              <button mat-button matStepperNext>Next</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="secondFormGroup" [editable]="isEditable">
+          <form [formGroup]="secondFormGroup">
+            <ng-template matStepLabel>Email Channel Config</ng-template>
+            <div class="row button-field">
+                <button mat-button (click)="addEmail()">Add Email</button>
+            </div>
+            <div class="row input-field" *ngFor="let emailId of emailsIDs; let i = index;">
+                <div class="col-md-8">
+                    <mat-form-field appearance="fill">
+                        <mat-label>email</mat-label>
+                        <input matInput formControlName="email{{emailId}}" >
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <div class="icone-poubelle">
+                        <img src="../../assets/image/poubelle.png" class="icone-poubelle" (click)="deleteEmail(emailId)">
+                    </div>   
+                </div>
+            </div>
+            <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button matStepperNext>Next</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="thirdFormGroup" [editable]="isEditable">
+            <form [formGroup]="thirdFormGroup">
+              <ng-template matStepLabel>Telegram Channel Config</ng-template>
+              <div class="row button-field">
+                  <button mat-button (click)="addTelagram()">Add Telegram</button>
+              </div>
+              <div class="row input-field" *ngFor="let telegramId of telegramsIDs; let i = index;">
+                  <div class="row">
+                    <div class="col-md-8 ">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Token</mat-label>
+                            <input matInput formControlName="token{{telegramId}}" >
+                        </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-8">
+                        <mat-form-field appearance="fill">
+                            <mat-label>ChatId</mat-label>
+                            <input matInput formControlName="chat_id{{telegramId}}" >
+                        </mat-form-field>
+                    </div>
+                      <div class="col-md-4">
+                          <div class="icone-poubelle">
+                              <img src="../../assets/image/poubelle.png" class="icone-poubelle" (click)="deleteTelagram(telegramId)">
+                          </div>   
+                      </div>
+                  </div>
+
+              </div>
+              <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+              </div>
+            </form>
+          </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Done</ng-template>
+          <p>You are now done.</p>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button (click)="submit()">Submit</button>
+          </div>
+        </mat-step>
+      </mat-stepper>
+      
+  </div>

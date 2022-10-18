@@ -1,0 +1,1 @@
+{"id":1,"host_machine_id":"23","pid":34,"log_file":"log","notification_params":"{\"email\":{\"receivers\":1,\"list_emails\":[\"mahmoud\"]},\"telegram\":{\"receivers\":1,\"list_telegrams\":[{\"token\":\"token\",\"chat_id\":\"token\"}]}}"}
